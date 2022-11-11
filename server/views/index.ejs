@@ -1,0 +1,14 @@
+<!-- include html header and main navigation bar -->
+<%- include partials/header.ejs %> <%- include partials/main_nav.ejs %> 
+
+<!-- If else statement to select the approriate index main content -->
+<% if(title == "Home") { %> 
+  <%- include partials/body_home.ejs %> 
+<% } else if(title == "Create Survey") { %> 
+  <%- include partials/body_create_survey.ejs %> 
+<% } else if(title == "Answer Survey") { %> 
+  <%- include partials/body_answer_survey.ejs %> 
+<% } %> 
+
+<!-- include bottom navigation and html footer -->
+<%- include partials/bottom_nav.ejs %> <%- include partials/footer.ejs %> 
