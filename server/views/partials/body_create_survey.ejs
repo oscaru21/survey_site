@@ -1,25 +1,62 @@
-<!-- Content for the about me page -->
-<div class="container p-5">
-    
-    <div class="mt-0 rounded text-center text-break">
-        <h1>THIS IS IN PROGRESS</h1>
-    </div>
+<!-- include html header and main navigation bar -->
+<%- include header.ejs %> <%- include main_nav.ejs %> 
 
-    <div class="row pt-4 justify-content-center">
-        <div class="col-10 col-md-7 col-sm-10 col-lg-6 col-xl-4 pt-5 align-self-center">
+<!--This file was updated on 11 Nov 2022-->
+
+<!-- Content for the create survey page -->
+<div class = "container">
+    <div class="row">
+      <div class = "offset-md-3 col-md-6">
+        <form class = "form" method = "POST" >
+          <div class = "form-group">
+  
+            <label for = "nameTextField"><h3 style="text-align: center; color:#6900FF; font-weight: 900;">Name your survey</h3></label>
+            <input
+              type="text"
+              class="form-control"
+              id="nameTextField"
+              placeholder="enter the name of your survey"
+              name="name"
+              required
+            />
+  
+            <label for = "deadlineTextField"><h3 style="text-align: center; color:#6900FF; font-weight: 900;">Set the deadline for your survey</h3></label>
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="deadlineTextField"
+              placeholder="mm-dd-yyyy"
+              name="deadline"
+              required
+            />
+  
+            <label for = "descTextField"><h3 style="text-align: center; color:#6900FF; font-weight: 900;">Survey Description</h3></label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="descTextField"
+              placeholder="Survey Description"
+              name="description"
+              required
+              ></textarea>
+  
+  
+              <div class = "center">
+                <button class = "btn btn-primary" type= "submit" style="color:#6900FF">
+                  Next >
+                </button>
+              </div>
             
-                <img src="../Assets/images/about_me.jpg" class="img-fluid" alt="...">
-            
-        </div>
-        <div class="col-md-8 col-sm-12 col-lg-6 col-xl-8 pt-5 align-self-center text-break">
-                <h2><b>XXXXX</b></h2><br>
-                <h5><p class="justify">
-                    XXXXX <br><br>
-                </p>
-                </h5>
-                <a href="../Assets/documents/resume.pdf" target="_blank">
-                <button type="button" class="btn btn-outline-dark" href="../Assets/documents/resume.pdf" target="_blank">View Resume</button></a>
-            
-        </div>
+  
+  
+          </div>
+  
+        </form>
+  
+  
+      </div>
     </div>
-</div>
+  </div>
+
+  <!-- include bottom navigation and html footer -->
+<%- include bottom_nav.ejs %> <%- include footer.ejs %> 
