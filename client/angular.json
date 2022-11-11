@@ -23,9 +23,14 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js", 
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -99,6 +104,10 @@
     }
   },
   "cli": {
+<<<<<<< Updated upstream
     "analytics": "198072ab-671c-44cb-a20e-b7597b473520"
+=======
+    "analytics": "5b1ef5e6-7449-4e35-91b0-708b62392b20"
+>>>>>>> Stashed changes
   }
 }
