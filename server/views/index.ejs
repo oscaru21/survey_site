@@ -1,0 +1,18 @@
+<!-- include html header and main navigation bar -->
+<%- include partials/header.ejs %> <%- include partials/main_nav.ejs %> 
+
+<!-- If else statement to select the approriate index main content -->
+<% if(title == "Home") { %> 
+  <%- include partials/body_home.ejs %> 
+<% } else if(title == "About Me") { %> 
+  <%- include partials/body_about.ejs %> 
+<% } else if(title == "Projects") { %> 
+  <%- include partials/body_projects.ejs %> 
+<% } else if(title == "Services") { %> 
+  <%- include partials/body_services.ejs %> 
+<% } else if(title == "Contact Me") { %> 
+  <%- include partials/body_contact.ejs %> 
+<% } %> 
+
+<!-- include bottom navigation and html footer -->
+<%- include partials/bottom_nav.ejs %> <%- include partials/footer.ejs %> 
