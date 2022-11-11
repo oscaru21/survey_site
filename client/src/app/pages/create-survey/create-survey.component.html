@@ -1,1 +1,56 @@
-<p>create-survey works!</p>
+<!--This file was updated on 11 Nov 2022-->
+
+<!-- Content for the create survey page -->
+<div class = "container">
+    <div class="row">
+      <div class = "offset-md-3 col-md-6">
+        <form class = "form" method = "POST" >
+          <div class = "form-group">
+  
+            <label for = "nameTextField"><h3 style="text-align: center; color:#6900FF; font-weight: 900;">Name your survey</h3></label>
+            <input
+              type="text"
+              class="form-control"
+              id="nameTextField"
+              placeholder="enter the name of your survey"
+              name="name"
+              required
+            />
+  
+            <label for = "deadlineTextField"><h3 style="text-align: center; color:#6900FF; font-weight: 900;">Set the deadline for your survey</h3></label>
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="deadlineTextField"
+              placeholder="mm-dd-yyyy"
+              name="deadline"
+              required
+            />
+  
+            <label for = "descTextField"><h3 style="text-align: center; color:#6900FF; font-weight: 900;">Survey Description</h3></label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="descTextField"
+              placeholder="Survey Description"
+              name="description"
+              required
+              ></textarea>
+  
+  
+              <div class = "center">
+                <button class = "btn btn-primary" type= "submit" style="color:#6900FF">
+                  Next >
+                </button>
+              </div>
+            
+  
+  
+          </div>
+  
+        </form>
+  
+  
+      </div>
+    </div>
+  </div>
