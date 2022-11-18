@@ -1,11 +1,12 @@
-//TODO 
-//this has to be changed in line with the defined schema
+export class SurveyService
+{
+  [x: string]: any;
+  constructor(
+    public _id: string,
+    public creator: string,
+    public title: string,
+    public description: string,
 
+  ){}
 
-export class Survey{
-    _id!: string;
-    title!: string;
-    description!: string;
-    expiryDate!: Date;
-    creationDate!: Date;
 }
