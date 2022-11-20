@@ -1,0 +1,47 @@
+<mat-card>
+    <form (submit)="onSaveProfile(postForm)" #postForm="ngForm">
+    <h3 color="warn">Signup</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput name="email" [ngModel]="signup?.email">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput name="username" [ngModel]="signup?.username">
+    </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Gender</mat-label>
+    
+      <input matInput name="gender" [ngModel]="signup?.gender">   
+  </mat-form-field>
+  <hr>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Age</mat-label>
+    <input matInput name="age" [ngModel]="signup?.age">
+  </mat-form-field>
+  <hr>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput name="password" type="password"   [ngModel]="signup?.password">
+  </mat-form-field>
+  <hr>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Confirm Password</mat-label>
+    <input matInput name="confirm password" type="password" [ngModel]="signup?.confirm_password">
+  </mat-form-field>
+  <hr>
+
+
+
+
+
+  <button mat-raised-button color="primary" class="accent" type="submit">Signup</button>
+  
+  </form>
+  </mat-card>
+  

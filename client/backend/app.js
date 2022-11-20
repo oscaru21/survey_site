@@ -4,10 +4,12 @@ const bodyParser = require('body-parser')
 const app = express();
 
 const Survey = require('./models/survey');
+const Signup = require('./models/signup')
 const { default: mongoose } = require('mongoose');
 // const survey = require('./models/survey');
 
-const surveyRoutes = require('./routes/surveys')
+const surveyRoutes = require('./routes/surveys');
+const signupRoutes = require('./routes/signup');
 
 // app.use(cors());
 app.use(bodyParser.json());
@@ -38,5 +40,6 @@ mongoose.connect("mongodb+srv://barbarians:kZCej5oI6AeLWv0Q@cluster0.v8utvo3.mon
 
 
   app.use("/survey",surveyRoutes);
+  app.use("/signup",signupRoutes);
 
   module.exports = app;

@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@syncfusion/ej2-angular-dropdowns": "^20.3.57"
+  }
+}
