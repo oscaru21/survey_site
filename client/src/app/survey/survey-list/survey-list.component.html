@@ -1,0 +1,18 @@
+<mat-accordion multi="true" *ngIf="surveys.length>0">
+  <mat-expansion-panel *ngFor="let survey of surveys">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{survey['title']}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{survey['creator']}}
+      </mat-panel-description>
+      </mat-expansion-panel-header>
+        <p>{{survey['description']}}</p>
+        <mat-action-row>
+          <button mat-raised-button [routerLink]="['/edit', survey._id]" color="primary">Edit</button>
+          <button mat-raised-button color="warn" (click)="onDelete(survey._id)">Delete</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+</mat-accordion>
+<p *ngIf="surveys.length <= 0 ">No post added yet!</p>

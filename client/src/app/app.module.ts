@@ -1,17 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavComponent } from './partials/nav/nav.component';
-import { HomeComponent } from './pages/home/home.component';
-import { CreateSurveyComponent } from './pages/create-survey/create-survey.component';
-import { AnswerSurveyComponent } from './pages/answer-survey/answer-survey.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { SurveyComponent } from './components/survey/survey.component';
-import { QuestionComponent } from './components/question/question.component';
-import { MultipleChoiceQuestionComponent } from './components/multiple-choice-question/multiple-choice-question.component';
-import { ShortAnswerQuestionComponent } from './components/short-answer-question/short-answer-question.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -21,30 +11,28 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BottomNavComponent } from './partials/bottom-nav/bottom-nav.component';
+
+import { AppComponent } from './app.component';
+import { SurveyCreateComponent } from './survey/survey-create/survey-create.component';
+import { HeaderComponent } from './header/header.component';
+import { SurveyListComponent } from './survey/survey-list/survey-list.component';
+import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
-    HomeComponent,
-    CreateSurveyComponent,
-    AnswerSurveyComponent,
-    ProfileComponent,
-    SurveyComponent,
-    QuestionComponent,
-    MultipleChoiceQuestionComponent,
-    ShortAnswerQuestionComponent,
-    BottomNavComponent
+    SurveyCreateComponent,
+    HeaderComponent,
+    SurveyListComponent,
+    FooterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,

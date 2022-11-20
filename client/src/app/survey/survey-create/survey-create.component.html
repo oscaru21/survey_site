@@ -1,0 +1,23 @@
+<mat-card>
+  <form (submit)="onSaveSurvey(postForm)" #postForm="ngForm">
+  <h3 color="warn">Survey Information</h3>
+  <mat-form-field appearance="fill">
+    <mat-label>Your name</mat-label>
+    <input matInput name="creator" [ngModel]="survey?.creator">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Survey Name</mat-label>
+    <input matInput name="title" [ngModel]="survey?.title">
+  </mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Survey Description</mat-label>
+  <input matInput name="description" [ngModel]="survey?.description">
+</mat-form-field>
+<hr>
+<button mat-raised-button color="primary" class="accent" type="submit">Save Survey</button>
+
+</form>
+</mat-card>
+
