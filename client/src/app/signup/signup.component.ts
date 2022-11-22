@@ -13,14 +13,18 @@ import { SignupService } from './signup.service';
 })
 export class SignupComponent implements OnInit {
 
+
+  
+
   constructor(public signupService:SignupService, public route:ActivatedRoute) { }
 
   private mode ='create';
   private signupID:string;
   signup:Signup;
 
-  ngOnInit():void{
-
+  ngOnInit()
+  {
+    console.log("gucci");
   }
 
   addEmail:"";
@@ -48,8 +52,11 @@ export class SignupComponent implements OnInit {
   public localData:Object[] = [
     {Id: 'Option1', gender: 'Male'},
     {Id: 'Option2', gender: 'Female'},
-
     {Id: 'Option3', gender: 'Prefer not to answer'}
 
   ]
+
+  
 }
+
+

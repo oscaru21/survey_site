@@ -14,7 +14,7 @@ router.post('', (req, res, next) => {
   profile.save().then(createdProfile =>{
     res.json({
       message: 'Profile created successfully',
-      pfofileID: createdProfile._id,
+      profileID: createdProfile._id,
     })
   });
 

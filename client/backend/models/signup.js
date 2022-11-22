@@ -4,9 +4,9 @@ const signupSchema = mongoose.Schema({
   email: {type: String},
   username: {type: String},
   gender: {type: String},
-  age:{type: Int32Array},
+  age:{type: String},
   password: {type:String},
-  confirm_password:{type:string}
+  confirm_password:{type:String}
 
 });
 

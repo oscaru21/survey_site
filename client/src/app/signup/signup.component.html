@@ -1,22 +1,32 @@
 <mat-card>
     <form (submit)="onSaveProfile(postForm)" #postForm="ngForm">
     <h3 color="warn">Signup</h3>
+
+
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input matInput name="email" [ngModel]="signup?.email">
+      <input matInput name="email" type="email" [ngModel]="signup?.email">
     </mat-form-field>
+
+    <br>
   
     <mat-form-field appearance="fill">
       <mat-label>Username</mat-label>
       <input matInput name="username" [ngModel]="signup?.username">
     </mat-form-field>
-  
-  <mat-form-field appearance="fill">
-    <mat-label>Gender</mat-label>
+
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>gender</mat-label>
+      <mat-select>
+        <mat-option value="male">Male</mat-option>
+        <mat-option value="female">Female</mat-option>
+        <mat-option value="other">Prefer not to answer</mat-option>
+      </mat-select>
+    </mat-form-field>
     
-      <input matInput name="gender" [ngModel]="signup?.gender">   
-  </mat-form-field>
-  <hr>
+
 
   <mat-form-field appearance="fill">
     <mat-label>Age</mat-label>

@@ -13,6 +13,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
+
+
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -43,6 +46,7 @@ import { SignupComponent } from './signup/signup.component';
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatButtonModule,
     MatToolbarModule,

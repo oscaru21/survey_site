@@ -14,14 +14,14 @@ export class SignupService {
 
 
 
-  addProfile(email:string, username:string, gender:string, age:Int32Array,password:string, confirm_password:string){
+  addProfile(email:string, username:string, gender:string, age:string,password:string, confirm_password:string){
     const signup:Signup = { _id: null, email:email, username:username,gender:gender,age:age,password:password,confirm_password:password};
     this.http.post<{message:string,signupID: string}>('http://localhost:3000/signup', signup).subscribe((responseData)=>{
       const signupID = responseData.signupID;
       signup._id = signupID;
       this.signups.push(signup);
       this.signupUpdated.next([...this.signups])
-      this.router.navigate(['/create']);
+      this.router.navigate(['/']);
       console.log("Add PROFILE in services is working")
     });
   }
