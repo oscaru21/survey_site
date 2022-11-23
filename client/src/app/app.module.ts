@@ -19,6 +19,16 @@ import { HeaderComponent } from './header/header.component';
 import { SurveyListComponent } from './survey/survey-list/survey-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
+import { AuthComponent } from './admin/auth/auth.component';
+import { AdminModule } from './admin/admin.module';
+import { JwtModule, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
+import { AuthService } from './model/auth.service';
+import { RestDataSource } from './model/rest.datasource';
+
+export function jwtTokenGetter(): string
+{
+  return localStorage.getItem('id_token');
+}
 
 @NgModule({
   declarations: [
@@ -27,7 +37,7 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     SurveyListComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,8 +52,14 @@ import { HomeComponent } from './home/home.component';
     MatIconModule,
     MatExpansionModule,
     HttpClientModule,
+    AdminModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: jwtTokenGetter
+      }
+    })
   ],
-  providers: [],
+  providers: [AuthService, RestDataSource],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

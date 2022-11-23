@@ -373,3 +373,6 @@ animation: translate 3s ease-in-out infinite;
   transform: translateY(var(--translation));
 }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,48 @@
+
+  
+  <main>
+    <div class="container col-xxl-5 p-4">
+      <!-- Message Area -->
+      <div class="bg-danger mt-2 p-2 text-center text-white"
+          *ngIf='errorMessage != null'>
+          {{ errorMessage }}
+      </div>
+    <form autocomplete='off' #form='ngForm' (ngSubmit)='authenticate(form)'>
+        <!-- Username input -->
+        <fieldset class="form-outline mb-4">
+            <label class="form-label" for="username">Username</label>
+          <input type="text" class="form-control" 
+          [(ngModel)]='user.username'
+          name='username' placeholder='Enter Username'
+          id='username' required autofocus autocomplete='off'/>
+        </fieldset>
+      
+        <!-- Password input -->
+        <fieldset class="form-outline mb-4">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" class="form-control"
+            [(ngModel)]='user.password'
+            name='password' placeholder='Enter Password'
+            id='password' required autocomplete='off'>
+        </fieldset>
+
+        <h3>Not registered yet?</h3>
+        <button class='btn btn-outline-dark btn-sm m-1' routerLink='/signup'>
+          Register
+        </button>
+
+        <!-- Submit button -->
+        <fieldset class="form-group text-right d-flex flex-column">
+          <button class='btn btn-primary m-1' type='submit'>
+            <i class="fas fa-sign-in-alt"></i>
+            Login
+          </button>
+          <button class='btn btn-secondary m-1' routerLink='/home'>
+            <i class="fas fa-undo"></i>
+            Cancel
+          </button>
+        </fieldset>
+      
+      </form>
+    </div>
+  </main>
