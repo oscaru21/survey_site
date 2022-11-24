@@ -106,6 +106,6 @@ passport.use(strategy);
 //routing    
 app.use("/survey",surveyRoutes);
 //TODO: confirm with Oscar about endpoint
-app.use("/api", indexRouter);
+app.use("/", indexRouter);
 
 module.exports = app;
