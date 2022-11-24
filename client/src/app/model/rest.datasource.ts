@@ -29,25 +29,8 @@ export class RestDataSource
               private jwtService: JwtHelperService)
   {
     this.user = new User();
-    this.baseUrl = `https://127.0.0.1:3500/api/`;
+    this.baseUrl = `https://127.0.0.1:3000/`;
   }
-
-  //Surveys endpoints
-  getSurveys(): Observable<Survey[]>
-  {
-    return this.http.get<Survey[]>(this.baseUrl + 'surveys');
-  }
-
-  saveSurvey(survey: Survey): Observable<Survey>
-  {
-    this.loadToken();
-    console.log(JSON.stringify(survey));
-    return this.http.post<Survey>(this.baseUrl + 'surveys', survey, this.httpOptions);
-  }
-
-  //Questions endpoints
-
-  //Answers endpoints
 
   //Users endpoints
   addUser(user: User): Observable<any>
