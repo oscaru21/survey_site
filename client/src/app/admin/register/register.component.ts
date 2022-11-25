@@ -28,19 +28,24 @@ export class RegisterComponent implements OnInit
     if(form.valid)
     {
       this.auth.addUser(this.user).subscribe(data => {
-        // perform authentication
-        this.auth.authenticate(this.user).subscribe(data => {
-          this.success = data.success
+        console.log(data.success)
+        this.success = data.success
         if (this.success)
         {
-          this.auth.storeUserData(data.token, data.user);
-          this.router.navigateByUrl('admin/main');
+          // perform authentication
+          this.auth.authenticate(this.user).subscribe(data => {
+            if(data.success)
+            {
+              this.auth.storeUserData(data.token, data.user);
+            this.router.navigateByUrl('admin/main');
+            }
+          });
         }
         else
         {
           this.errorMessage = data.msg
         }
-        });
+        
       })
     }
     else

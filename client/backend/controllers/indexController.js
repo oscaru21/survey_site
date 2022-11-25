@@ -57,37 +57,32 @@ module.exports.processRegisterPage = (req, res, next) => {
         //password: req.body.password
         email: req.body.email,
     });
-
-    User.register(newUser, req.body.password, (err) => {
-        if(err)
+    console.log(newUser.username)
+    User.findOne({username: newUser.username}, function(err, user) {
+        console.log(user)
+        if (err) 
         {
-            console.log("Error: Inserting New User");
-            if(err.name == "UserExistsError")
-            {
-                return res.json({success: false, msg: 'User Already exist!'});
-            }
-        }
-        else
+            return res.json({success: false, msg: err});
+        } 
+        else if (user) 
         {
-            // if no error exists, then registration is successful
-            const payload = 
+            console.log("user exists");
+            return res.json({success: false, msg: 'User Already exist!'});
+        } 
+        else 
+        {
+        User.register(newUser, req.body.password, (err) => {
+            if(err)
             {
-                id: newUser._id,
-                username: newUser.username,
-                email: newUser.email
+                console.log("Error: Inserting New User");
             }
-
-            const authToken = jwt.sign(payload, DB.Secret, {
-                expiresIn: 604800 // 1 week
-            });
-            
-            return res.json({success: true, msg: 'User Logged in Successfully!', user: {
-                id: newUser._id,
-                username: newUser.username,
-                email: newUser.email
-            }, token: authToken});
-        }
+            else
+            {
+                // if no error exists, then registration is successful
+                return res.json({success: true, msg: "User registered"})
+            }
     });
+    }});
 }
 
 module.exports.performLogout = (req, res, next) => {
