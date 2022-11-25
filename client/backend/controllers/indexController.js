@@ -1,6 +1,4 @@
 let express = require('express');
-let router = express.Router();
-let mongoose = require('mongoose');
 let passport = require('passport');
 
 // enable jwt
@@ -22,8 +20,8 @@ module.exports.processLoginPage = (req, res, next) => {
         // is there a user login error?
         if(!user)
         {
-            req.flash('loginMessage', 'Authentication Error');
-            return res.redirect('/login');
+            console.log("Authentication  error");
+            return res.json({success: false, msg: 'Incorrect username or password'})
         }
         req.login(user, (err) => {
             // server error?
@@ -66,38 +64,33 @@ module.exports.processRegisterPage = (req, res, next) => {
             console.log("Error: Inserting New User");
             if(err.name == "UserExistsError")
             {
-                req.flash(
-                    'registerMessage',
-                    'Registration Error: User Already Exists!'
-                );
-                console.log('Error: User Already Exists!')
+                return res.json({success: false, msg: 'User Already exist!'});
             }
-            return res.render('auth/register',
-            {
-                title: 'Register',
-                messages: req.flash('registerMessage'),
-                displayName: req.user ? req.user.displayName : ''
-            });
         }
         else
         {
             // if no error exists, then registration is successful
+            const payload = 
+            {
+                id: newUser._id,
+                username: newUser.username,
+                email: newUser.email
+            }
 
-            // redirect the user and authenticate them
-
-            return res.json({success: true, msg: 'User Registered Successfully!'});
-
-            /*
-            return passport.authenticate('local')(req, res, () => {
-                res.redirect('/book-list')
+            const authToken = jwt.sign(payload, DB.Secret, {
+                expiresIn: 604800 // 1 week
             });
-            */
+            
+            return res.json({success: true, msg: 'User Logged in Successfully!', user: {
+                id: newUser._id,
+                username: newUser.username,
+                email: newUser.email
+            }, token: authToken});
         }
     });
 }
 
 module.exports.performLogout = (req, res, next) => {
     req.logout();
-    //res.redirect('/');
     res.json({success: true, msg: 'User Successfully Logged out!'});
 }

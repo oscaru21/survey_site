@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit
 {
   public user: User;
   public errorMessage: string;
+  public success: Boolean = true;
 
   constructor(private router: Router,
               private auth: AuthService) { }
@@ -26,18 +27,19 @@ export class RegisterComponent implements OnInit
   {
     if(form.valid)
     {
-      //register new user
-      //console.log(this.user.username);
-      //console.log(this.user.email);
-      
       this.auth.addUser(this.user).subscribe(data => {
         // perform authentication
         this.auth.authenticate(this.user).subscribe(data => {
-          if (data.success)
-          {
-            this.auth.storeUserData(data.token, data.user);
-            this.router.navigateByUrl('admin/main');
-          }
+          this.success = data.success
+        if (this.success)
+        {
+          this.auth.storeUserData(data.token, data.user);
+          this.router.navigateByUrl('admin/main');
+        }
+        else
+        {
+          this.errorMessage = data.msg
+        }
         });
       })
     }

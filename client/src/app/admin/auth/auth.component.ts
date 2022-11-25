@@ -12,6 +12,7 @@ export class AuthComponent implements OnInit
 {
   public user: User;
   public errorMessage: string;
+  public success: Boolean = true;
 
   constructor(private router: Router,
               private auth: AuthService) { }
@@ -26,11 +27,18 @@ export class AuthComponent implements OnInit
     if (form.valid)
     {
       // perform authentication
+      console.log(JSON.stringify(this.user));
+      
       this.auth.authenticate(this.user).subscribe(data => {
-        if (data.success)
+        this.success = data.success
+        if (this.success)
         {
           this.auth.storeUserData(data.token, data.user);
           this.router.navigateByUrl('admin/main');
+        }
+        else
+        {
+          this.errorMessage = data.msg
         }
       });
     }

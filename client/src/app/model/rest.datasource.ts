@@ -29,7 +29,7 @@ export class RestDataSource
               private jwtService: JwtHelperService)
   {
     this.user = new User();
-    this.baseUrl = `https://127.0.0.1:3000/`;
+    this.baseUrl = `http://localhost:3000/`;
   }
 
   //Users endpoints

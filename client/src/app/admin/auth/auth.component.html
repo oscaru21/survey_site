@@ -2,12 +2,11 @@
   
   <main>
     <div class="container col-xxl-5 p-4">
-      <!-- Message Area -->
-      <div class="bg-danger mt-2 p-2 text-center text-white"
-          *ngIf='errorMessage != null'>
-          {{ errorMessage }}
-      </div>
     <form autocomplete='off' #form='ngForm' (ngSubmit)='authenticate(form)'>
+        <div class="bg-danger mt-2 p-2 text-center text-white"
+          *ngIf='!success'>
+          {{ errorMessage }}
+        </div>
         <!-- Username input -->
         <fieldset class="form-outline mb-4">
             <label class="form-label" for="username">Username</label>
