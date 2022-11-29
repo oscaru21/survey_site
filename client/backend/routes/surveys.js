@@ -7,6 +7,16 @@ router.post('', (req, res, next) => {
     creator: req.body.creator,
     title: req.body.title,
     description: req.body.description,
+    question_1: req.body.question_1,
+    question_2: req.body.question_2,
+    question_3: req.body.question_3,
+    question_4: req.body.question_4,
+    question_5: req.body.question_5,
+    question_6: req.body.question_6,
+    question_7: req.body.question_7,
+    question_8: req.body.question_8,
+    question_9: req.body.question_9,
+    question_10: req.body.question_10,
   });
   survey.save().then(createdSurvey =>{
     res.json({
@@ -51,6 +61,16 @@ router.put("/:id", (req, res, next)=>{
     creator: req.body.creator,
     title: req.body.title,
     description: req.body.description,
+    question_1: req.body.question_1,
+    question_2: req.body.question_2,
+    question_3: req.body.question_3,
+    question_4: req.body.question_4,
+    question_5: req.body.question_5,
+    question_6: req.body.question_6,
+    question_7: req.body.question_7,
+    question_8: req.body.question_8,
+    question_9: req.body.question_9,
+    question_10: req.body.question_10,
   })
   Survey.updateOne({_id:req.params.id},survey).then(result=>{
     res.status(200).json({message:'Updated succesfully!'})

@@ -23,8 +23,8 @@ export class SurveysService {
     return this.surveysUpdated.asObservable();
   }
 
-  addSurvey(creator:string, title:string, description:string){
-    const survey:Survey = { _id: null, creator: creator, title: title, description:description};
+  addSurvey(creator:string, title:string, description:string, question_1:string, question_2:string, question_3:string, question_4:string, question_5:string, question_6:string, question_7:string, question_8:string, question_9:string, question_10:string){
+    const survey:Survey = { _id: null, creator: creator, title: title, description:description, question_1:question_1, question_2:question_2, question_3:question_3, question_4:question_4, question_5:question_5, question_6:question_6, question_7:question_7, question_8:question_8, question_9:question_9, question_10:question_10};
     this.http.post<{message:string,surveyId: string}>('http://localhost:3000/survey', survey).subscribe((responseData)=>{
       const surveyId = responseData.surveyId;
       survey._id = surveyId;
@@ -44,11 +44,13 @@ export class SurveysService {
   }
 
   getSurvey(id:string){
-    return this.http.get<{_id:string, creator:string, title:string, description:string}>('http://localhost:3000/survey/' + id);
+    return this.http.get<{
+      _id:string, creator:string, title:string, description:string, question_1: string, question_2: string, question_3: string, question_4: string, question_5: string, question_6: string, question_7: string, question_8: string, question_9: string, question_10: string
+}>('http://localhost:3000/survey/' + id);
   }
 
-  updateSurvey(id:string, creator: string, title: string, description: string){
-    const survey: Survey = {_id: id, creator:creator, title: title, description: description};
+  updateSurvey(id:string, creator: string, title: string, description: string, question_1:string, question_2:string, question_3:string, question_4:string, question_5:string, question_6:string, question_7:string, question_8:string, question_9:string, question_10:string){
+    const survey: Survey = {_id: id, creator:creator, title: title, description: description, question_1: question_1, question_2:question_2, question_3: question_3, question_4:question_4, question_5: question_5, question_6:question_6, question_7: question_7, question_8:question_8, question_9: question_9, question_10:question_10};
     this.http.put('http://localhost:3000/survey/' + id, survey).
     subscribe(response =>{
       const updatedSurveys = [...this.surveys];
