@@ -1,0 +1,27 @@
+<div #dataToExport>
+    <h1 style = "text-align: center">Survey Responses</h1>
+<mat-card>
+    <ejs-chart id="chart-container" [primaryXAxis]="primaryXAxis" [title] = "title">
+        <e-series-collection>
+        <e-series [dataSource]="chartData" type="Column" xName="year" yName="gold" 
+        name="Gold"> 
+        </e-series>              
+        </e-series-collection>
+    </ejs-chart>
+</mat-card>
+<br>
+<mat-card>
+    <ejs-chart id="chart-container2" [primaryXAxis]="primaryXAxis" [title] = "title">
+        <e-series-collection>
+        <e-series [dataSource]="chartData" type="Column" xName="year" yName="gold" 
+        name="Gold"> 
+        </e-series>              
+        </e-series-collection>
+    </ejs-chart>
+</mat-card>
+</div>
+<br>
+<button (click)="downloadAsPdf()" mat-raised-button color="primary"  type="submit">
+    Answer Survey <mat-icon>save_alt</mat-icon> 
+</button>
+

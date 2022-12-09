@@ -15,7 +15,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
-
+import { ChartModule } from '@syncfusion/ej2-angular-charts';
+import { CategoryService, LegendService, TooltipService } from '@syncfusion/ej2-angular-charts';
+import { DataLabelService, ColumnSeriesService } from '@syncfusion/ej2-angular-charts';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -32,6 +34,7 @@ import { AuthService } from './model/auth.service';
 import { RestDataSource } from './model/rest.datasource';
 import { AddAnswerDialogComponent } from './survey/add-answer-dialog/add-answer-dialog.component';
 import { SurveyAnswerComponent } from './survey/survey-answer/survey-answer.component';
+import { SurveyAnalyticsComponent } from './survey-analytics/survey-analytics.component';
 
 export function jwtTokenGetter(): string
 {
@@ -48,6 +51,7 @@ export function jwtTokenGetter(): string
     HomeComponent,
     AddAnswerDialogComponent,
     SurveyAnswerComponent,
+    SurveyAnalyticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +72,7 @@ export function jwtTokenGetter(): string
     MatDialogModule,
     MatRadioModule,
     MatCheckboxModule,
+    ChartModule,
     AdminModule,
     JwtModule.forRoot({
       config: {
@@ -75,7 +80,7 @@ export function jwtTokenGetter(): string
       }
     })
   ],
-  providers: [AuthService, RestDataSource],
+  providers: [AuthService, RestDataSource, CategoryService, ColumnSeriesService, LegendService, TooltipService, DataLabelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
