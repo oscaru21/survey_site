@@ -1,0 +1,58 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <h1 color="warn">{{surveyModel.title}}</h1>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <h2 color="warn">{{surveyModel.description}}</h2>
+        </mat-card-subtitle>
+        
+    </mat-card-header>
+    <form (ngSubmit)="onSubmit()" [formGroup]="surveyForm">
+
+
+       
+            <label>Survey Name</label>
+             <input matInput autocomplete="off" type="text" formControlName="surveyResponder" />
+        
+
+        <mat-card-content *ngFor="let question of getQuestions().controls; let i=index" >
+
+     
+
+          
+         <div>
+            <div [ngSwitch]="question.value.type">
+
+                <h3>{{question.value.label}}</h3>
+                
+                <mat-radio-group  id="question.value._id" aria-label="Select an option" *ngSwitchCase="'RADIO'"  class = "tp-radio-group"  >
+                    <div  *ngFor="let option of getOptions(i).controls;">
+                        <mat-radio-button (change)="onCheckRadio($event,question.value._id)" value="{{option.value.label}}">{{option.value.label}}</mat-radio-button> 
+                    </div>
+
+                  
+                </mat-radio-group>
+
+                <section *ngSwitchCase="'CHECK'" id="question.value._id" class = "tp-radio-group">
+                    <div *ngFor="let option of getOptions(i).controls;">
+                        <mat-checkbox  formControlName="{{question.value._id}}" (change)="onCheck($event,option.value.label,question.value._id)" >{{option.value.label}}</mat-checkbox>
+                    </div>
+                </section>
+
+                <input matInput *ngSwitchCase="'TEXT'" autocomplete="off" type="text" formControlName="{{question.value._id}}" />
+                
+            </div>
+         </div>
+
+          
+        </mat-card-content>
+  
+    <mat-card-actions>
+        <button mat-raised-button color="primary"  type="submit">
+            Answer Survey <mat-icon>save_alt</mat-icon> 
+        </button>
+    </mat-card-actions>
+    </form>
+   
+</mat-card>
