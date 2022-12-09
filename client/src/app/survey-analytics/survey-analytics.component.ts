@@ -43,7 +43,7 @@ export class SurveyAnalyticsComponent implements OnInit {
         unit: imageUnit,
         format: "a4"//[width + 50, height + 220]
       };
-      const pdf = new jsPDF("p", "pt", [width+50, height+220]);
+      const pdf = new jsPDF("l", "pt", [width+50, height+220]);
       pdf.setFontSize(48);
       pdf.setTextColor('#2585fe');
       pdf.addImage(result, 'PNG', 25, 185, width, height);
