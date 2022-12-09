@@ -1,0 +1,79 @@
+<mat-card>
+  <form [formGroup]="survey" (ngSubmit)="onSubmit()">  
+  <h3 color="warn">Survey Information</h3>
+  <mat-form-field appearance="outline">
+    <mat-label>Your name</mat-label>
+    <input matInput name="creator" formControlName="creator">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Survey Name</mat-label>
+    <input matInput name="title" formControlName="title">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Survey Description</mat-label>
+    <input matInput name="description" formControlName="description">
+  </mat-form-field>
+
+  <table class="table table-bordered" formArrayName="questions">  
+    <tr>  
+      <th colspan="2">Add questions:</th>  
+      <th width="70px"><button type="button" (click)="addQuestion()" mat-flat-button color="primary">Add More</button></th>  
+    </tr>  
+    <tr *ngFor="let question of getQuestions(survey); let i=index"  [formGroupName]="i">  
+
+      <div class="question-form-row">
+        <table  width="105%">
+          <tr>  
+            <th colspan="2"></th>  
+            <th width="80px"></th>  
+          </tr>   
+          <tr>
+            <td>  
+              <mat-form-field [hidden]="true">
+                <input matInput autocomplete="off" type="number" formControlName="questionNumber" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Label :</mat-label>
+              
+                <input matInput name="questionLabel" formControlName="questionLabel">
+              </mat-form-field>
+            </td> 
+  
+            <td>
+              <mat-form-field appearance="outline">
+                <mat-label>Type of component :</mat-label>
+                <mat-select formControlName="questionType" placeholder="Type of the question" [(value)]="question.value.questionType">
+                  <mat-option value="RADIO">Radio</mat-option>
+                  <mat-option value="CHECK">Check</mat-option>
+                  <mat-option value="TEXT">Text</mat-option>
+              </mat-select>
+              </mat-form-field>
+            </td>
+           
+            <td align="center">  
+                <button type="button" (click)="removeQuestion(i)" mat-icon-button color="warn"><mat-icon>delete_forever</mat-icon></button>  
+            </td>   
+          </tr>
+          <tr>
+            <td rowspan="2">  
+              <button type="button" (click)="showDialog(i)" mat-icon-button color="primary">Add Answeres<mat-icon>library_add</mat-icon></button>  
+              <div *ngFor="let option of getOptions(i).value; let j=index"> 
+                  {{option.optionTitle}}  <button type="button" (click)="removeOptions(i,j)" mat-icon-button color="warn"><mat-icon>clear</mat-icon></button>  
+              </div>
+               
+          </td>  
+          </tr>
+        </table>
+      </div>
+    </tr>  
+  </table>
+
+<hr>
+<button mat-raised-button color="primary" class="accent" type="submit">Save Survey</button>
+
+</form>
+</mat-card>
+
