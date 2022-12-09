@@ -1,8 +1,10 @@
 import { createPlatform, Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Survey } from '../model/survey.model';
+import { Question } from '../model/question.model';
+import { Answer } from '../model/answer.model';
 
 @Injectable({providedIn: 'root'})
 
@@ -23,8 +25,8 @@ export class SurveysService {
     return this.surveysUpdated.asObservable();
   }
 
-  addSurvey(creator:string, title:string, description:string, question_1:string, question_2:string, question_3:string, question_4:string, question_5:string, question_6:string, question_7:string, question_8:string, question_9:string, question_10:string){
-    const survey:Survey = { _id: null, creator: creator, title: title, description:description, question_1:question_1, question_2:question_2, question_3:question_3, question_4:question_4, question_5:question_5, question_6:question_6, question_7:question_7, question_8:question_8, question_9:question_9, question_10:question_10};
+  addSurvey(creator:string, title:string, description:string, question: Question[]){
+    const survey:Survey = { _id: null, creator: creator, title: title, description:description,question};
     this.http.post<{message:string,surveyId: string}>('http://localhost:3000/survey', survey).subscribe((responseData)=>{
       const surveyId = responseData.surveyId;
       survey._id = surveyId;
@@ -43,14 +45,12 @@ export class SurveysService {
     });
   }
 
-  getSurvey(id:string){
-    return this.http.get<{
-      _id:string, creator:string, title:string, description:string, question_1: string, question_2: string, question_3: string, question_4: string, question_5: string, question_6: string, question_7: string, question_8: string, question_9: string, question_10: string
-}>('http://localhost:3000/survey/' + id);
+  getSurvey(id:string):Observable<Survey>{
+    return this.http.get<Survey>('http://localhost:3000/survey/' + id);
   }
 
-  updateSurvey(id:string, creator: string, title: string, description: string, question_1:string, question_2:string, question_3:string, question_4:string, question_5:string, question_6:string, question_7:string, question_8:string, question_9:string, question_10:string){
-    const survey: Survey = {_id: id, creator:creator, title: title, description: description, question_1: question_1, question_2:question_2, question_3: question_3, question_4:question_4, question_5: question_5, question_6:question_6, question_7: question_7, question_8:question_8, question_9: question_9, question_10:question_10};
+  updateSurvey(id:string, creator: string, title: string, description: string, question: Question[]){
+    const survey: Survey = {_id: id, creator:creator, title: title, description: description, question};
     this.http.put('http://localhost:3000/survey/' + id, survey).
     subscribe(response =>{
       const updatedSurveys = [...this.surveys];
@@ -59,6 +59,14 @@ export class SurveysService {
       this.surveys = updatedSurveys;
       this.surveysUpdated.next([...this.surveys]);
       this.router.navigate(['/list']);
+    });
+  }
+
+
+  answerSurvey(repondent:string, surveyId:string, answerIn:string[], questionId: string[]){
+    const answerRequest:Answer = { _id: null, repondent: repondent, surveyId: surveyId, answer:answerIn,questionId};
+    this.http.post<{message:string,surveyId: string}>('http://localhost:3000/survey/answer', answerRequest).subscribe((responseData)=>{    
+     this.router.navigate(['/list']);
     });
   }
 

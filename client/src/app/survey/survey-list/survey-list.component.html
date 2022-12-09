@@ -10,6 +10,7 @@
       </mat-expansion-panel-header>
         <p>{{survey['description']}}</p>
         <mat-action-row>
+          <button mat-raised-button [routerLink]="['/answer', survey._id]" color="primary">Answer</button>
           <button mat-raised-button [routerLink]="['/edit', survey._id]" color="primary">Edit</button>
           <button mat-raised-button color="warn" (click)="onDelete(survey._id)">Delete</button>
         </mat-action-row>
