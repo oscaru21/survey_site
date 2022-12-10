@@ -9,6 +9,7 @@
       </mat-panel-description>
       </mat-expansion-panel-header>
         <p>{{survey['description']}}</p>
+        <p> <strong>Expired Date</strong>: {{ survey['expiredDate'] | date}}</p>
         <mat-action-row>
           <button mat-raised-button [routerLink]="['/answer', survey._id]" color="primary">Answer</button>
           <button mat-raised-button [routerLink]="['/edit', survey._id]" color="primary">Edit</button>

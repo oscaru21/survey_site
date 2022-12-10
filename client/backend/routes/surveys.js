@@ -11,12 +11,12 @@ router.post('', (req, res, next) => {
   let idQuestions = [];
 
   questions.forEach(element => {
- 
+
     let idOptions = [];
     let options = element.options;
 
     options.forEach(optionElement => {
-        
+
       var optionModel = new Option({
         position: optionElement.position,
         label: optionElement.label
@@ -39,6 +39,7 @@ router.post('', (req, res, next) => {
  const survey = new Survey({
     creator: req.body.creator,
     title: req.body.title,
+    expiredDate: req.body.expiredDate,
     description: req.body.description,
     questions: idQuestions
   });
@@ -47,7 +48,7 @@ router.post('', (req, res, next) => {
       message: 'Survey added successfully',
       surveyId: createdSurvey._id,
     })
-  }); 
+  });
 
 })
 
@@ -70,21 +71,21 @@ router.delete("/:id", (req, res, next)=>{
 })
 
 router.get("/:id", (req, res, next)=>{
-  Survey.findById(req.params.id)            
+  Survey.findById(req.params.id)
   .populate(
     { path: 'questions',
       populate:{path: 'options'}
-    })                     
-  .exec(function(error, survey) {  
-    if(survey){              
+    })
+  .exec(function(error, survey) {
+    if(survey){
       res.status(200).json({
         message: 'Surveys fetched successfully',
         surveys: survey,
-      });     
+      });
     } else {
       res.status(404).json({message: 'Survey not found!!'})
     }
-  })    
+  })
 })
 
 router.post("/answer", (req, res, next)=>{
@@ -100,7 +101,7 @@ router.post("/answer", (req, res, next)=>{
       message: 'Survey successfully Completed',
       surveyId: createdSurvey._id,
     })
-  }); 
+  });
 })
 
 
@@ -113,14 +114,14 @@ router.put("/:id", (req, res, next)=>{
   let idQuestions = [];
 
   questions.forEach(element => {
- 
+
     let idOptions = [];
     let options = element.options;
 
 
     options.forEach(optionElement => {
-        
-   
+
+
 
       if(optionElement._id !== null && optionElement._id !== ''  && optionElement._id!==undefined){
 
@@ -131,7 +132,7 @@ router.put("/:id", (req, res, next)=>{
           label: optionElement.label
         });
 
-       
+
         Option.updateOne({_id:optionElement._id},optionModel).then(result=>{
           console.log('update.... option update')
          });
@@ -147,10 +148,10 @@ router.put("/:id", (req, res, next)=>{
         optionModel.save();
         idOptions.push(optionModel._id);
       }
-      
+
     });
 
-   
+
     if(element._id !== null && element._id !== ''  && element._id!==undefined){
 
       var question =({
@@ -176,7 +177,7 @@ router.put("/:id", (req, res, next)=>{
      idQuestions.push(data._id);
 
     }
-  
+
   })
 
   const survey = new Survey({

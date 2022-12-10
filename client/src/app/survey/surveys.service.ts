@@ -25,8 +25,8 @@ export class SurveysService {
     return this.surveysUpdated.asObservable();
   }
 
-  addSurvey(creator:string, title:string, description:string, question: Question[]){
-    const survey:Survey = { _id: null, creator: creator, title: title, description:description,question};
+  addSurvey(creator:string, title:string, expiredDate:Date, description:string, question: Question[]){
+    const survey:Survey = { _id: null, creator: creator, title: title, expiredDate:expiredDate, description:description,question};
     this.http.post<{message:string,surveyId: string}>('http://localhost:3000/survey', survey).subscribe((responseData)=>{
       const surveyId = responseData.surveyId;
       survey._id = surveyId;
@@ -49,8 +49,8 @@ export class SurveysService {
     return this.http.get<Survey>('http://localhost:3000/survey/' + id);
   }
 
-  updateSurvey(id:string, creator: string, title: string, description: string, question: Question[]){
-    const survey: Survey = {_id: id, creator:creator, title: title, description: description, question};
+  updateSurvey(id:string, creator: string, title: string, expiredDate:Date, description: string, question: Question[]){
+    const survey: Survey = {_id: id, creator:creator, title: title, expiredDate:expiredDate, description: description, question};
     this.http.put('http://localhost:3000/survey/' + id, survey).
     subscribe(response =>{
       const updatedSurveys = [...this.surveys];
@@ -65,7 +65,7 @@ export class SurveysService {
 
   answerSurvey(repondent:string, surveyId:string, answerIn:string[], questionId: string[]){
     const answerRequest:Answer = { _id: null, repondent: repondent, surveyId: surveyId, answer:answerIn,questionId};
-    this.http.post<{message:string,surveyId: string}>('http://localhost:3000/survey/answer', answerRequest).subscribe((responseData)=>{    
+    this.http.post<{message:string,surveyId: string}>('http://localhost:3000/survey/answer', answerRequest).subscribe((responseData)=>{
      this.router.navigate(['/list']);
     });
   }

@@ -15,6 +15,7 @@ import { MatOptionSelectionChange } from '@angular/material/core';
   styleUrls: ['./survey-create.component.css']
 })
 export class SurveyCreateComponent implements OnInit {
+[x: string]: any;
 
   survey: FormGroup;
   private mode ='create';
@@ -32,18 +33,19 @@ export class SurveyCreateComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap: ParamMap)=>{
       if(paramMap.has('surveyId')){
         this.mode = "edit";
-        this.surveyId = paramMap.get('surveyId'); 
-        
+        this.surveyId = paramMap.get('surveyId');
+
         this.surveysService.getSurvey(this.surveyId).subscribe(
           (data)=>{
-          this.surveyModel = {  
+          this.surveyModel = {
               _id:data['surveys']._id,
               creator:data['surveys'].creator,
               title:data['surveys'].title,
+              expiredDate:data['surveys'].expiredDate,
               description:data['surveys'].description,
               question:data['surveys'].questions
             }
-        
+
           this.buildSurvey( this.surveyModel);
         });
       } else {
@@ -57,17 +59,18 @@ export class SurveyCreateComponent implements OnInit {
     this.survey = new FormGroup({
       creator: new FormControl(surveyModel.creator),
       title: new FormControl(surveyModel.title),
+      expiredDate: new FormControl(surveyModel.expiredDate),
       description: new FormControl(surveyModel.description),
       questions: this.fb.array([]) ,
     });
-    
+
 
     const control = <FormArray>this.survey.get('questions');
 
      surveyModel.question.forEach(item=>{
         control.push(this.getQuestionFormGroup(item));
      });
-   
+
   }
 
   getQuestionFormGroup(question: Question) {
@@ -95,7 +98,7 @@ export class SurveyCreateComponent implements OnInit {
       });
       listOption.push(optionForm);
     });
-  
+
     return listOption;
   }
 
@@ -105,6 +108,7 @@ export class SurveyCreateComponent implements OnInit {
     this.survey = new FormGroup({
       creator: new FormControl(''),
       title: new FormControl(''),
+      expiredDate: new FormControl(''),
       description: new FormControl(''),
       questions: this.fb.array([]) ,
     });
@@ -172,7 +176,7 @@ export class SurveyCreateComponent implements OnInit {
 
   showDialog(i){
     const mdConfig = new MatDialogConfig();
- 
+
     mdConfig.disableClose = true;
     mdConfig.autoFocus = true;
     mdConfig.width = "500px";
@@ -194,7 +198,7 @@ export class SurveyCreateComponent implements OnInit {
     });
 
      optios.push(optionForm);
-          
+
     });
 
   }
@@ -203,11 +207,11 @@ export class SurveyCreateComponent implements OnInit {
     return this.survey.get('questions') as FormArray;
   }
 
-  onSubmit() {  
- 
+  onSubmit() {
+
    let questionsControl = <FormArray> this.survey.get('questions');
 
-   // create Survey object 
+   // create Survey object
    let questions: Question[] = [];
 
    questionsControl.controls.forEach(element => {
@@ -215,29 +219,30 @@ export class SurveyCreateComponent implements OnInit {
     if(this.mode === "edit" && element.get('_id') != null) {
       id = element.get('_id').value;
     }
-   
+
     let number = element.get('questionNumber').value;
     let label = element.get('questionLabel').value;
     let type = element.get('questionType').value;
-    let option : Option[] =   this.getOptionsArray(element); 
+    let option : Option[] =   this.getOptionsArray(element);
 
     let question = new Question(id,number,label,type,option);
     questions.push(question);
-    
+
    });
 
-  
+
 
    let creator = this.survey.controls['creator'].value;
    let title = this.survey.controls['title'].value;
    let description = this.survey.controls['description'].value;
+   let expiredDate = this.survey.controls['expiredDate'].value;
 
    if(this.mode === "create"){
-    this.surveysService.addSurvey(creator,title, description,questions)
+    this.surveysService.addSurvey(creator,title, expiredDate, description, questions)
    } else {
-    this.surveysService.updateSurvey(this.surveyModel._id,creator,title, description,questions)
+    this.surveysService.updateSurvey(this.surveyModel._id,creator,title, expiredDate, description,questions)
    }
-   
+
   }
 
   getOptionsArray(element){
@@ -252,5 +257,5 @@ export class SurveyCreateComponent implements OnInit {
     return option;
 
   }
-  
+
 }

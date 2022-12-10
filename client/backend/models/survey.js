@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const surveySchema = mongoose.Schema({
   creator: {type: String},
   title: {type: String},
+  expiredDate: {type: Date},
   description: {type: String},
   questions: [{
     type: Schema.Types.ObjectId,

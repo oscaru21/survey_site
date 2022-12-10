@@ -28,11 +28,12 @@ export class SurveyAnswerComponent implements OnInit {
 
     this.route.paramMap.subscribe((paramMap: ParamMap)=>{
 
-      this.surveysService.getSurvey(paramMap.get('surveyId')).subscribe( (data) => { 
+      this.surveysService.getSurvey(paramMap.get('surveyId')).subscribe( (data) => {
         this.surveyModel =  new Survey(
           data['surveys']._id,
           data['surveys'].creator,
           data['surveys'].title,
+          data['surveys'].expiredDate,
           data['surveys'].description,
           data['surveys'].questions);
 
@@ -40,21 +41,21 @@ export class SurveyAnswerComponent implements OnInit {
 
           this.surveyResponder = new FormControl('');
           this.surveyForm.addControl("surveyResponder", this.surveyResponder);
-          
-          this.surveyModel.question.forEach(question =>{ 
+
+          this.surveyModel.question.forEach(question =>{
               this.surveyForm.addControl(""+question._id, new FormControl(''));
               this.fields.push(question._id);
           })
-         
+
 
       });
 
-     
+
 
     });
 
-   
-   
+
+
   }
 
 
@@ -64,10 +65,10 @@ export class SurveyAnswerComponent implements OnInit {
     });
   }
 
-  getQuestionFormGroup(question: Question[]) { 
+  getQuestionFormGroup(question: Question[]) {
     let listQuestions = [];
     question.forEach(question => {
-      
+
       let questionForm =  this.fb.group({
         _id:new FormControl(question._id),
         position: new FormControl(question.position),
@@ -77,16 +78,16 @@ export class SurveyAnswerComponent implements OnInit {
       });
       listQuestions.push(questionForm);
     });
-   
+
     console.log(listQuestions);
 
     return listQuestions;
   }
 
 
-  getOptionFormGroup(option: Option[]) { 
+  getOptionFormGroup(option: Option[]) {
     let listOption = [];
-   
+
     option.forEach(option=>{
       let optionForm = this.fb.group({
         formGroupFields:new FormControl(option._id),
@@ -107,7 +108,7 @@ export class SurveyAnswerComponent implements OnInit {
         this.fields.push(field);
       }
     });
-  
+
     return formGroupFields;
   }
 
@@ -124,14 +125,14 @@ export class SurveyAnswerComponent implements OnInit {
    }
 
 
-   onSubmit() {  
+   onSubmit() {
 
 
     const answer: string[] = [];
 
      this.fields.forEach(element => {
-       
-         let SurveyId = this.surveyModel._id; 
+
+         let SurveyId = this.surveyModel._id;
 
          console.log(this.mapCheckBox.get(element))
 
@@ -141,7 +142,7 @@ export class SurveyAnswerComponent implements OnInit {
              answer.push(element);
           });
          }
-       
+
 
          let radioButtonValueByElement = this.mapRadioButton.get(element);
           if(radioButtonValueByElement != null){
@@ -149,10 +150,10 @@ export class SurveyAnswerComponent implements OnInit {
           }
 
           if(this.surveyForm.get(element).value != null) {
-            
+
             answer.push(this.surveyForm.get(element).value);
          }
-       
+
         console.log(element);
         this.surveysService.answerSurvey(this.surveyResponder.value,SurveyId, answer,this.fields);
      });
@@ -165,10 +166,10 @@ export class SurveyAnswerComponent implements OnInit {
       let array = this.mapCheckBox.get(questionId);
       console.log(ob.checked);
       if(ob.checked == true){
-       
-   
+
+
         array.push(value);
-      
+
       } else {
 
         const startIndex = array.indexOf(value);
@@ -176,14 +177,14 @@ export class SurveyAnswerComponent implements OnInit {
 
         if (startIndex !== -1) {
           array.splice(startIndex, deleteCount);
-        } 
-       
+        }
+
       if(array.length == 0){
         this.mapCheckBox.delete(questionId);
       }
 
     }
-      
+
     } else {
       const array: string[] = [];
       array.push(value);
@@ -191,11 +192,11 @@ export class SurveyAnswerComponent implements OnInit {
     }
 
     console.log(this.mapCheckBox);
-   
-  } 
+
+  }
 
   onCheckRadio($event: MatRadioChange, questionId: string){
-   
+
     if(this.mapRadioButton.has(questionId)) {
       this.mapRadioButton.delete(questionId);
     } else {
