@@ -52,6 +52,15 @@ router.post('', (req, res, next) => {
 
 })
 
+router.get('/ans',(req, res, next)=>{
+  Survey.find({expiredDate: {$gte: new Date() }}).then(documents =>{
+    res.status(200).json({
+      message: 'Surveys fetched successfully',
+      surveys: documents,
+    });
+   })
+})
+
 router.get('',(req, res, next)=>{
   Survey.find().then(documents =>{
     res.status(200).json({
@@ -71,8 +80,7 @@ router.delete("/:id", (req, res, next)=>{
 })
 
 router.get("/:id", (req, res, next)=>{
-  Survey.findById(req.params.id)
-  .populate(
+  Survey.findById(req.params.id).populate(
     { path: 'questions',
       populate:{path: 'options'}
     })

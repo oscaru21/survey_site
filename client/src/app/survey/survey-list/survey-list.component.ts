@@ -11,15 +11,32 @@ import { Subscription } from 'rxjs';
 export class SurveyListComponent implements OnInit, OnDestroy {
   surveys:Survey[] =[];
   private surveysSub: Subscription;
-
+  Date_check = Date.now();
   constructor(public surveysService: SurveysService){}
 
   ngOnInit() {
+    this.Date_check = Date.now();
     this.surveysService.getSurveys();
     this.surveysSub = this.surveysService.getSurveyUpdateListener().
     subscribe((surveys:Survey[])=>{
       this.surveys = surveys;
     });
+  }
+
+
+  getExpiredDate(date:Date){
+    const expireDateConvert = new Date(date).getTime();
+    return expireDateConvert;
+  }
+
+  handleComparedate(date:Date){
+    const expireDateConvert = new Date(date).getTime();
+    const nowDate = Date.now();
+    if(expireDateConvert>nowDate){
+      return false;
+    } else {
+      return true;
+    }
   }
 
   onDelete(surveyId: string){
