@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 import { HttpClientModule } from '@angular/common/http';
@@ -28,6 +29,7 @@ import { SurveyListComponent } from './survey/survey-list/survey-list.component'
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './admin/auth/auth.component';
+import { RegisterComponent } from './admin/register/register.component';
 import { AdminModule } from './admin/admin.module';
 import { JwtModule, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
 import { AuthService } from './model/auth.service';
@@ -50,6 +52,8 @@ export function jwtTokenGetter(): string
     HomeComponent,
     AddAnswerDialogComponent,
     SurveyAnswerComponent,
+    AuthComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +76,7 @@ export function jwtTokenGetter(): string
     MatCheckboxModule,
     AdminModule,
     MatDatepickerModule,
+    MatMenuModule,
     MatNativeDateModule,
     JwtModule.forRoot({
       config: {

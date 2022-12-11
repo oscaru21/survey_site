@@ -1,52 +1,65 @@
 
-  
   <main>
-    <div class="container col-xxl-5 p-4">
-      <!-- Message Area -->
-      <div class="bg-danger mt-2 p-2 text-center text-white"
-          *ngIf='!success'>
-          {{ errorMessage }}
-        </div>
-    <form autocomplete='off' #form='ngForm' (ngSubmit)='addUser(form)'>
-        <!-- Username input -->
-        <fieldset class="form-outline mb-4">
-            <label class="form-label" for="username">Username</label>
-          <input type="text" class="form-control" 
-          [(ngModel)]='user.username'
-          name='username' placeholder='Enter Username'
-          id='username' required autofocus autocomplete='off'/>
-        </fieldset>
-
-        <!-- Email input -->
-        <fieldset class="form-outline mb-4">
-            <label class="form-label" for="username">Email</label>
-          <input type="email" class="form-control" 
-          [(ngModel)]='user.email'
-          name='email' placeholder='Enter Email'
-          id='email' required autofocus autocomplete='off'/>
-        </fieldset>
-      
-        <!-- Password input -->
-        <fieldset class="form-outline mb-4">
-            <label class="form-label" for="password">Password</label>
-            <input type="password" class="form-control"
-            [(ngModel)]='user.password'
-            name='password' placeholder='Enter Password'
-            id='password' required autocomplete='off'>
-        </fieldset>
-      
-        <!-- Submit button -->
-        <fieldset class="form-group text-right d-flex flex-column">
-          <button class='btn btn-primary m-1' type='submit'>
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-toolbar color="primary">
+          <span>Register</span>
+        </mat-toolbar>
+        <form
+          class="form-body"
+          autocomplete="off"
+          #form="ngForm"
+          (ngSubmit)='addUser(form)'
+        >
+          <div class="bg-danger mt-2 p-2 text-center text-white" *ngIf="!success">
+            {{ errorMessage }}
+          </div>
+          <!-- Username input -->
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Username"
+              [(ngModel)]="user.username"
+              name="username"
+              required
+              autofocus
+              autocomplete="off"
+            />
+          </mat-form-field>
+          <!-- Email input -->
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Email"
+              [(ngModel)]="user.email"
+              name="email"
+              type="email"
+              required
+              autocomplete="off"
+            />
+          </mat-form-field>
+          <!-- Password input -->
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Password"
+              [(ngModel)]="user.password"
+              type="password"
+              name="password"
+              required
+              autocomplete="off"
+            />
+          </mat-form-field>
+          <button class="submit-button" mat-raised-button color="primary" type="submit">
             <i class="fas fa-sign-in-alt"></i>
             Sign Up
           </button>
-          <button class='btn btn-secondary m-1' routerLink='/home'>
+          <button class="submit-button" mat-stroked-button routerLink="/home">
             <i class="fas fa-undo"></i>
             Cancel
           </button>
-        </fieldset>
-      
-      </form>
-    </div>
+        </form>
+      </mat-card-content>
+        
+    </mat-card>
   </main>

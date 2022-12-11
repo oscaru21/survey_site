@@ -1,0 +1,18 @@
+.card {
+    padding: 0;
+    max-width: 460px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.submit-button {
+    width: 100%;
+    margin: 8px auto !important;
+}

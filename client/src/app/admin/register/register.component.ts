@@ -7,7 +7,8 @@ import { AuthService } from '../../model/auth.service';
 import { User } from '../../model/user.model';
 
 @Component({
-  templateUrl: './register.component.html'
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit
 {
@@ -37,7 +38,7 @@ export class RegisterComponent implements OnInit
             if(data.success)
             {
               this.auth.storeUserData(data.token, data.user);
-            this.router.navigateByUrl('admin/main');
+            this.router.navigateByUrl('create');
             }
           });
         }
