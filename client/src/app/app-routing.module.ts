@@ -5,7 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { SurveyCreateComponent } from './survey/survey-create/survey-create.component';
 import { SurveyAnswerComponent } from './survey/survey-answer/survey-answer.component';
 import { SurveyListComponent } from './survey/survey-list/survey-list.component';
-
+import { SurveyAnalyticsComponent } from './survey/survey-analytics/survey-analytics.component';
 const routes: Routes = [
   {path:'home', component: HomeComponent},
   {path:'login', redirectTo: '/admin/auth', pathMatch: 'full'},
@@ -13,6 +13,7 @@ const routes: Routes = [
   {path:'list', component: SurveyListComponent},
   {path:'create', component: SurveyCreateComponent, canActivate: [AuthGuard]},
   {path:'edit/:surveyId', component: SurveyCreateComponent},
+  {path: 'analytics/:surveyId', component: SurveyAnalyticsComponent},
   {path:'answer/:surveyId', component: SurveyAnswerComponent},
   {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
   {path: '', redirectTo: '/home', pathMatch: 'full'},

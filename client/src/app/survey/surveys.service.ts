@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Survey } from '../model/survey.model';
 import { Question } from '../model/question.model';
 import { Answer } from '../model/answer.model';
+import { SurveyAnswer } from '../model/surveyanswer.model';
 
 @Injectable({providedIn: 'root'})
 
@@ -70,4 +71,18 @@ export class SurveysService {
     });
   }
 
+  getAnswerSurvey(id:string):Observable<SurveyAnswer>{
+    return this.http.get<SurveyAnswer>('http://localhost:3000/survey/answer/' + id);
+  }
+
+  getAnswerSurveyMock(id:string):Observable<SurveyAnswer>{
+    let response = JSON.parse('{"questions":{"questionAns":[{"type":"CHECK","label_answers":["Gotta Catch \'Em All!","nah bruh, touch grass fr", "nah bruh, touch grass fr", "nah bruh, touch grass fr"]}]}}');
+    let obs = new Observable<SurveyAnswer>((subscriber) => {
+      setTimeout(()=>{
+          subscriber.next(response);
+          subscriber.complete();
+      }, 3000);
+  });
+  return obs;
+  }
 }
