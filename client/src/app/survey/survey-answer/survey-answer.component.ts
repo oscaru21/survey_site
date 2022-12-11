@@ -7,6 +7,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Survey } from 'src/app/model/survey.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatRadioButton, MatRadioChange, MatRadioGroup } from '@angular/material/radio';
+import { throwIfEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-survey-answer',
@@ -19,8 +20,7 @@ export class SurveyAnswerComponent implements OnInit {
   surveyForm: FormGroup;
   surveyModel: Survey;
   fields = [];
-  mapCheckBox = new Map<string, string[]>();
-  mapRadioButton = new Map<String,string>();
+  mapOptionSelected = new Map<string, string[]>();
 
   constructor( public route: ActivatedRoute,  public surveysService: SurveysService, private fb:FormBuilder) { }
 
@@ -126,83 +126,38 @@ export class SurveyAnswerComponent implements OnInit {
 
 
    onSubmit() {
-
-
-    const answer: string[] = [];
-
-     this.fields.forEach(element => {
-
-         let SurveyId = this.surveyModel._id;
-
-         console.log(this.mapCheckBox.get(element))
-
-         if(this.mapCheckBox.has(element)) {
-          let arrayCheckBox = this.mapCheckBox.get(element);
-          arrayCheckBox.forEach(element =>{
-             answer.push(element);
-          });
-         }
-
-
-         let radioButtonValueByElement = this.mapRadioButton.get(element);
-          if(radioButtonValueByElement != null){
-            answer.push(element);
-          }
-
-          if(this.surveyForm.get(element).value != null) {
-
-            answer.push(this.surveyForm.get(element).value);
-         }
-
-        console.log(element);
-        this.surveysService.answerSurvey(this.surveyResponder.value,SurveyId, answer,this.fields);
-     });
+    const json = JSON.stringify(Object.fromEntries(this.mapOptionSelected));
+    this.surveysService.answerSurvey(this.surveyResponder.value,this.surveyModel._id, json);
    }
 
 
    onCheck(ob: MatCheckboxChange, value: string, questionId: string) {
     console.log(" checked: " + ob.checked + " Question id : "+ questionId + "value : "+ value);
-    if(this.mapCheckBox.has(questionId)) {
-      let array = this.mapCheckBox.get(questionId);
-      console.log(ob.checked);
-      if(ob.checked == true){
-
-
-        array.push(value);
-
-      } else {
-
-        const startIndex = array.indexOf(value);
-        const deleteCount = 1;
-
-        if (startIndex !== -1) {
-          array.splice(startIndex, deleteCount);
-        }
-
-      if(array.length == 0){
-        this.mapCheckBox.delete(questionId);
-      }
-
-    }
-
-    } else {
+    const deleteCount = 1;
+    if(!this.mapOptionSelected.has(questionId)){
       const array: string[] = [];
       array.push(value);
-      this.mapCheckBox.set(questionId,array);
+      this.mapOptionSelected.set(questionId,array);
+    } else {
+        let array = this.mapOptionSelected.get(questionId);
+        if(array.includes(value)) {
+          array.splice(array.indexOf(value), deleteCount);
+          if(array.length == 0){ this.mapOptionSelected.delete(questionId);}
+        } else {
+          array.push(value);
+        }
     }
-
-    console.log(this.mapCheckBox);
-
+    
   }
 
-  onCheckRadio($event: MatRadioChange, questionId: string){
+  onCheckRadio($event: MatRadioChange,value: string ,questionId: string){
 
-    if(this.mapRadioButton.has(questionId)) {
-      this.mapRadioButton.delete(questionId);
+    if(this.mapOptionSelected.has(questionId)) {
+      this.mapOptionSelected.delete(questionId);
     } else {
-      this.mapRadioButton.set(questionId,$event.value);
+      const array: string[] = [value];
+      this.mapOptionSelected.set(questionId,array);
     }
-    console.log(this.mapRadioButton);
   }
 
   }

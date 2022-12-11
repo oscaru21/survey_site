@@ -4,15 +4,8 @@ const Schema = mongoose.Schema;
 
 const answerSchema = mongoose.Schema({
   repondent: {type: String},
-  answer: [String],
-  survey: {
-          type: Schema.Types.ObjectId, 
-          ref:"survey"
-        },
-  questions: [{
-    type: Schema.Types.ObjectId,
-    ref: "question"
-}]
+  survey: {type: Schema.Types.ObjectId, ref:"survey"},
+  answers: {type: Schema.Types.String},
 });
 
 module.exports = mongoose.model('Answer', answerSchema);

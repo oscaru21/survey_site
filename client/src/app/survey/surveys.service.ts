@@ -63,9 +63,9 @@ export class SurveysService {
   }
 
 
-  answerSurvey(repondent:string, surveyId:string, answerIn:string[], questionId: string[]){
-    const answerRequest:Answer = { _id: null, repondent: repondent, surveyId: surveyId, answer:answerIn,questionId};
-    this.http.post<{message:string,surveyId: string}>('http://localhost:3000/survey/answer', answerRequest).subscribe((responseData)=>{
+  answerSurvey(repondent:string, survey:string, questions: string){
+    const answerRequest:Answer = { _id: null, repondent: repondent, survey: survey, questions:questions};
+    this.http.post<{message:string,AnswerResponse: Answer}>('http://localhost:3000/survey/answer', answerRequest).subscribe((responseData)=>{
      this.router.navigate(['/list']);
     });
   }

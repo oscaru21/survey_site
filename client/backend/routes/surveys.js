@@ -89,19 +89,32 @@ router.get("/:id", (req, res, next)=>{
 })
 
 router.post("/answer", (req, res, next)=>{
-
   var answer = new Answer({
     repondent: req.body.repondent,
-    answer: req.body.answer,
-    survey: req.body.surveyId,
-    questions: req.body.questionId
+    survey: req.body.survey,
+    answers:  req.body.questions
   });
   answer.save().then(createdSurvey =>{
     res.json({
       message: 'Survey successfully Completed',
-      surveyId: createdSurvey._id,
+      answerResponse: createdSurvey,
     })
   });
+})
+
+
+router.get("/answer/:id", (req, res, next)=>{
+  Answer.find({'respondent':req.params.id})
+  .exec(function(error, answer) {
+    if(answer){
+      res.status(200).json({
+        message: 'Surveys fetched successfully',
+        answer: answer,
+      });
+    } else {
+      res.status(404).json({message: 'Survey not found!!'})
+    }
+  })
 })
 
 
@@ -125,8 +138,6 @@ router.put("/:id", (req, res, next)=>{
 
       if(optionElement._id !== null && optionElement._id !== ''  && optionElement._id!==undefined){
 
-        console.log('ENTERED TO UPDATE');
-
         var optionModel = ({
           position: optionElement.position,
           label: optionElement.label
@@ -143,8 +154,6 @@ router.put("/:id", (req, res, next)=>{
           position: optionElement.position,
           label: optionElement.label
         });
-
-        console.log('ENTERED TO CREATE');
         optionModel.save();
         idOptions.push(optionModel._id);
       }

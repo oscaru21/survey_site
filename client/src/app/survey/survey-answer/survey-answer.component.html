@@ -18,9 +18,6 @@
 
         <mat-card-content *ngFor="let question of getQuestions().controls; let i=index" >
 
-     
-
-          
          <div>
             <div [ngSwitch]="question.value.type">
 
@@ -28,7 +25,7 @@
                 
                 <mat-radio-group  id="question.value._id" aria-label="Select an option" *ngSwitchCase="'RADIO'"  class = "tp-radio-group"  >
                     <div  *ngFor="let option of getOptions(i).controls;">
-                        <mat-radio-button (change)="onCheckRadio($event,question.value._id)" value="{{option.value.label}}">{{option.value.label}}</mat-radio-button> 
+                        <mat-radio-button (change)="onCheckRadio($event,option.value.label,question.value.label)" value="{{option.value.label}}">{{option.value.label}}</mat-radio-button> 
                     </div>
 
                   
@@ -36,7 +33,7 @@
 
                 <section *ngSwitchCase="'CHECK'" id="question.value._id" class = "tp-radio-group">
                     <div *ngFor="let option of getOptions(i).controls;">
-                        <mat-checkbox  formControlName="{{question.value._id}}" (change)="onCheck($event,option.value.label,question.value._id)" >{{option.value.label}}</mat-checkbox>
+                        <mat-checkbox  formControlName="{{question.value._id}}" (change)="onCheck($event,option.value.label,question.value.label)" >{{option.value.label}}</mat-checkbox>
                     </div>
                 </section>
 
