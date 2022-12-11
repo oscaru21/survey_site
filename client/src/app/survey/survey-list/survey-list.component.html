@@ -2,7 +2,8 @@
   <mat-expansion-panel *ngFor="let survey of surveys">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{survey['title']}}
+        {{survey['title']}} &nbsp;&nbsp;
+        <mat-label *ngIf="isDisabled(survey['expiredDate'])" style="color:red">[ Expired ]</mat-label>
       </mat-panel-title>
       <mat-panel-description>
         {{survey['creator']}}
@@ -11,7 +12,7 @@
         <p>{{survey['description']}}</p>
         <p> <strong>Expired Date</strong>: {{ survey['expiredDate'] | date}}</p>
         <mat-action-row>
-          <button mat-raised-button [routerLink]="['/answer', survey._id]" color="primary">Answer</button>
+          <button mat-raised-button [routerLink]="['/answer', survey._id]" color="primary" [disabled]="isDisabled(survey['expiredDate'])">Answer</button>
           <button mat-raised-button [routerLink]="['/edit', survey._id]" color="primary">Edit</button>
           <button mat-raised-button color="warn" (click)="onDelete(survey._id)">Delete</button>
         </mat-action-row>

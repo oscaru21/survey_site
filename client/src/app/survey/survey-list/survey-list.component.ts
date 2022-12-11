@@ -29,4 +29,15 @@ export class SurveyListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.surveysSub.unsubscribe();
   }
+
+  isDisabled(expirtionDate: Date){
+    const now = new Date();
+    let expiredDate = new Date(expirtionDate);
+    let isDisabled : boolean = false;
+    if(expiredDate.getTime() < now.getTime()) {
+      isDisabled = true;
+    }
+    return isDisabled;
+    
+  }
 }
