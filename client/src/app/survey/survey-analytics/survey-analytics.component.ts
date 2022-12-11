@@ -10,6 +10,7 @@ import { AnswerResponder } from 'src/app/model/answerresponder.model';
 import { Option } from 'src/app/model/option.model';
 import { Question } from 'src/app/model/question.model';
 import * as passport from 'passport';
+import { IPointRenderEventArgs } from '@syncfusion/ej2-angular-charts';
 
 
 @Component({
@@ -37,6 +38,12 @@ export class SurveyAnalyticsComponent implements OnInit {
   fields = [];
   uniqueAnswers :String [] = [];
   surveyResponder: FormControl;
+
+  public pointRender(args: IPointRenderEventArgs): void {
+    let seriesColor: string[] = ['#00bdae', '#404041', '#357cd2', '#e56590', '#f8b883',
+            '#70ad47', '#dd8abd', '#7f84e8', '#7bb4eb', '#ea7a57'];
+    args.fill = seriesColor[args.point.index];
+  };
 
   ngOnInit(): void {
     this.primaryXAxis = { valueType: 'Category' };
