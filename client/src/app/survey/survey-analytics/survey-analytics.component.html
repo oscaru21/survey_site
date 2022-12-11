@@ -1,0 +1,20 @@
+<div #dataToExport>
+    <h1 style = "text-align: center">Survey Responses</h1>
+    <div  *ngFor="let item of getQuestions().controls; let i = index">
+        <div *ngIf="item.value.type != 'TEXT'">
+            <mat-card>
+            <ejs-chart [primaryXAxis]="primaryXAxis" [title]='item.value.label'>
+            <e-series-collection>
+                <e-series [dataSource]="dataSource[i]" type="Column" xName="option" yName="answer" name = "Answers">
+                </e-series>
+            </e-series-collection>
+            </ejs-chart>
+            </mat-card>
+        </div>
+    </div>
+</div>
+    
+<br>
+<button (click)="downloadAsPdf()" mat-raised-button color="primary"  type="submit">
+    Save Answers <mat-icon>save_alt</mat-icon> 
+</button>

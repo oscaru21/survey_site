@@ -18,7 +18,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
-
+import { ChartModule } from '@syncfusion/ej2-angular-charts';
+import { CategoryService, LegendService, TooltipService } from '@syncfusion/ej2-angular-charts';
+import { DataLabelService, ColumnSeriesService } from '@syncfusion/ej2-angular-charts';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -36,6 +38,7 @@ import { AuthService } from './model/auth.service';
 import { RestDataSource } from './model/rest.datasource';
 import { AddAnswerDialogComponent } from './survey/add-answer-dialog/add-answer-dialog.component';
 import { SurveyAnswerComponent } from './survey/survey-answer/survey-answer.component';
+import { SurveyAnalyticsComponent } from './survey/survey-analytics/survey-analytics.component';
 
 export function jwtTokenGetter(): string
 {
@@ -53,7 +56,8 @@ export function jwtTokenGetter(): string
     AddAnswerDialogComponent,
     SurveyAnswerComponent,
     AuthComponent,
-    RegisterComponent
+    RegisterComponent,
+    SurveyAnalyticsComponent
   ],
   imports: [
     BrowserModule,
@@ -82,9 +86,10 @@ export function jwtTokenGetter(): string
       config: {
         tokenGetter: jwtTokenGetter
       }
-    })
+    }),
+    ChartModule
   ],
-  providers: [AuthService, RestDataSource],
+  providers: [AuthService, RestDataSource, CategoryService, ColumnSeriesService, LegendService, TooltipService, DataLabelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

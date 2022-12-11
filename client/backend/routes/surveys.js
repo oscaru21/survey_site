@@ -104,7 +104,7 @@ router.post("/answer", (req, res, next)=>{
 
 
 router.get("/answer/:id", (req, res, next)=>{
-  Answer.find({'respondent':req.params.id})
+  Answer.find({'survey':req.params.id})
   .exec(function(error, answer) {
     if(answer){
       res.status(200).json({
