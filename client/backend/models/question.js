@@ -9,6 +9,10 @@ const questionSchema = mongoose.Schema({
     options: [{
         type: Schema.Types.ObjectId,
         ref: "option"
+    }],
+    answer: [{
+        type: Schema.Types.ObjectId,
+        ref: "answer"
     }]
     
 });

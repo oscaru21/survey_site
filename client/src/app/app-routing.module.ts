@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'create', component: SurveyCreateComponent, canActivate: [AuthGuard]},
   {path:'edit/:surveyId', component: SurveyCreateComponent},
   {path:'answer/:surveyId', component: SurveyAnswerComponent},
-  {path: 'analytics', component: SurveyAnalyticsComponent},
+  {path: 'analytics/:surveyId', component: SurveyAnalyticsComponent},
   {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}

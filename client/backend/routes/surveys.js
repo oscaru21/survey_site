@@ -2,7 +2,8 @@ const express = require('express');
 const Survey = require("../models/survey")
 const Question = require("../models/question")
 const Option = require("../models/option")
-const Answer = require("../models/answer")
+const Answer = require("../models/answer");
+const answer = require('../models/answer');
 const router = express.Router();
 
 router.post('', (req, res, next) => {
@@ -74,6 +75,7 @@ router.get("/:id", (req, res, next)=>{
   .populate(
     { path: 'questions',
       populate:{path: 'options'}
+      //populate: {path: 'answer'}
     })                     
   .exec(function(error, survey) {  
     if(survey){              
@@ -85,6 +87,20 @@ router.get("/:id", (req, res, next)=>{
       res.status(404).json({message: 'Survey not found!!'})
     }
   })    
+})
+
+router.get("/answer/:id", (req, res, next)=> {
+  answer.find({'survey': req.params.id})
+  .populate(
+   { path: 'questions'
+    }
+  ).exec(function(error,answer){
+    if(answer){
+      res.status(200).json({
+        answer: answer
+      })
+    }
+  })
 })
 
 router.post("/answer", (req, res, next)=>{

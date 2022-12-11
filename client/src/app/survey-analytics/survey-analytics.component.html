@@ -1,27 +1,32 @@
 <div #dataToExport>
     <h1 style = "text-align: center">Survey Responses</h1>
-<mat-card>
-    <ejs-chart id="chart-container" [primaryXAxis]="primaryXAxis" [title] = "title">
-        <e-series-collection>
-        <e-series [dataSource]="chartData" type="Column" xName="year" yName="gold" 
-        name="Gold"> 
-        </e-series>              
-        </e-series-collection>
-    </ejs-chart>
-</mat-card>
-<br>
-<mat-card>
-    <ejs-chart id="chart-container2" [primaryXAxis]="primaryXAxis" [title] = "title">
-        <e-series-collection>
-        <e-series [dataSource]="chartData" type="Column" xName="year" yName="gold" 
-        name="Gold"> 
-        </e-series>              
-        </e-series-collection>
-    </ejs-chart>
-</mat-card>
+    <div  *ngFor="let item of getQuestions(); let i = index">
+        <div *ngIf="item.value.type != 'TEXT'">
+            <mat-card>
+            <ejs-chart [primaryXAxis]="primaryXAxis" [title]='item.value.label'>
+            <e-series-collection>
+                <e-series [dataSource]="dataSource[i]" type="Column" xName="option" yName="answer" name = "Answers">
+                </e-series>
+            </e-series-collection>
+            </ejs-chart>
+            </mat-card>
+        </div>
+    </div>
+    <!--<div *ngFor="let question of getQuestions().controls">
+        <mat-card>
+            <ejs-chart id="question.value._id" [primaryXAxis]="primaryXAxis" [title] = "question.value.label">
+                <e-series-collection>
+                <e-series [dataSource]="chartData" type="Column" xName="year" yName="gold" 
+                name="Gold"> 
+                </e-series>              
+                </e-series-collection>
+            </ejs-chart>
+        </mat-card>
+    </div>-->
 </div>
+
 <br>
 <button (click)="downloadAsPdf()" mat-raised-button color="primary"  type="submit">
-    Answer Survey <mat-icon>save_alt</mat-icon> 
+    Save Answers <mat-icon>save_alt</mat-icon> 
 </button>
 

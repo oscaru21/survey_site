@@ -5,12 +5,14 @@ import { Router } from '@angular/router';
 import { Survey } from '../model/survey.model';
 import { Question } from '../model/question.model';
 import { Answer } from '../model/answer.model';
+import { SurveyAnswer } from '../model/surveyanswer.model';
 
 @Injectable({providedIn: 'root'})
 
 export class SurveysService {
   private surveys: Survey[] = [];
   private surveysUpdated = new Subject<Survey[]>();
+  response : SurveyAnswer ;
 
   constructor(private http: HttpClient, private router:Router){}
 
@@ -47,6 +49,19 @@ export class SurveysService {
 
   getSurvey(id:string):Observable<Survey>{
     return this.http.get<Survey>('http://localhost:3000/survey/' + id);
+  }
+
+  getAnswerSurvey(id:string):Observable<SurveyAnswer>{
+    //return this.http.get<SurveyAnswer>('http://localhost:3000/survey/answer/' + id);
+    this.response = JSON.parse('{"questions":{"questionAns":[{"type":"CHECK","label_answers":["Gotta Catch \'Em All!","nah bruh, touch grass fr", "nah bruh, touch grass fr", "nah bruh, touch grass fr"]}]}}');
+    let obs = new Observable<SurveyAnswer>((subscriber) => {
+      setTimeout(()=>{
+          subscriber.next(this.response);
+          subscriber.complete();
+      }, 3000);
+  });
+  return obs;
+  //return <Observable>(this.http.get<SurveyAnswer>(this.response));
   }
 
   updateSurvey(id:string, creator: string, title: string, description: string, question: Question[]){

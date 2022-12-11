@@ -13,7 +13,7 @@
           <button mat-raised-button [routerLink]="['/answer', survey._id]" color="primary">Answer</button>
           <button mat-raised-button [routerLink]="['/edit', survey._id]" color="primary">Edit</button>
           <button mat-raised-button color="warn" (click)="onDelete(survey._id)">Delete</button>
-          <button mat-raised-button color = "accent" [routerLink]="['/analytics']">Analytics</button>
+          <button mat-raised-button color = "accent" [routerLink]="['/analytics', survey._id]">Analytics</button>
         </mat-action-row>
       </mat-expansion-panel>
 </mat-accordion>
