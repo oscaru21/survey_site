@@ -1,10 +1,8 @@
 <mat-card>
   <form [formGroup]="survey" (ngSubmit)="onSubmit()">
   <h3 color="warn">Survey Information</h3>
-  <mat-form-field appearance="outline">
-    <mat-label>Your name</mat-label>
-    <input matInput name="creator" formControlName="creator">
-  </mat-form-field>
+    <mat-label >Your name: </mat-label>
+    <mat-label>{{user.username}}</mat-label>
 
   <mat-form-field appearance="outline">
     <mat-label>Survey Name</mat-label>

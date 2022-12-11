@@ -8,6 +8,7 @@ import { AddAnswerDialogComponent} from '../add-answer-dialog/add-answer-dialog.
 import { Question } from 'src/app/model/question.model';
 import { Option } from 'src/app/model/option.model';
 import { MatOptionSelectionChange } from '@angular/material/core';
+import { User } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-survey-create',
@@ -21,6 +22,7 @@ export class SurveyCreateComponent implements OnInit {
   private mode ='create';
   private surveyId:string;
   surveyModel:Survey;
+  user: User;
   constructor(private matDialog:MatDialog,  private fb:FormBuilder, public surveysService: SurveysService, public route: ActivatedRoute) {
 
   }
@@ -30,6 +32,7 @@ export class SurveyCreateComponent implements OnInit {
   }
 
   onInit(){
+    this.user = JSON.parse(localStorage.getItem('user'));
     this.route.paramMap.subscribe((paramMap: ParamMap)=>{
       if(paramMap.has('surveyId')){
         this.mode = "edit";
@@ -232,7 +235,8 @@ export class SurveyCreateComponent implements OnInit {
 
 
 
-   let creator = this.survey.controls['creator'].value;
+   //let creator = this.survey.controls['creator'].value;
+   let creator = this.user.username;
    let title = this.survey.controls['title'].value;
    let description = this.survey.controls['description'].value;
    let expiredDate = this.survey.controls['expiredDate'].value;
