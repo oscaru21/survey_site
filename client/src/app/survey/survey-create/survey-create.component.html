@@ -2,7 +2,7 @@
   <form [formGroup]="survey" (ngSubmit)="onSubmit()">
   <h3 color="warn">Survey Information</h3>
     <mat-label >Your name: </mat-label>
-    <mat-label>{{user.username}}</mat-label>
+    <mat-label *ngIf="user.username != null">{{user.username}}</mat-label>
 
   <mat-form-field appearance="outline">
     <mat-label>Survey Name</mat-label>
