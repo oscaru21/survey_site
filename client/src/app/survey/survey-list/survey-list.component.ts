@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Survey } from '../../model/survey.model'
 import { SurveysService } from '../surveys.service';
 import { Subscription } from 'rxjs';
+import { User } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-survey-list',
@@ -10,12 +11,14 @@ import { Subscription } from 'rxjs';
 })
 export class SurveyListComponent implements OnInit, OnDestroy {
   surveys:Survey[] =[];
+  user: User;
   private surveysSub: Subscription;
 
   constructor(public surveysService: SurveysService){}
 
   ngOnInit() {
     this.surveysService.getSurveys();
+    this.user = JSON.parse(localStorage.getItem('user'));
     this.surveysSub = this.surveysService.getSurveyUpdateListener().
     subscribe((surveys:Survey[])=>{
       this.surveys = surveys;
@@ -38,6 +41,13 @@ export class SurveyListComponent implements OnInit, OnDestroy {
       isDisabled = true;
     }
     return isDisabled;
-    
+  }
+
+  isCreator(creator: String){
+    let isCreator : boolean = false;
+    if(creator == this.user.username) {
+      isCreator = true;
+    }
+    return isCreator;
   }
 }

@@ -73,7 +73,7 @@ export class SurveyCreateComponent implements OnInit {
      surveyModel.question.forEach(item=>{
         control.push(this.getQuestionFormGroup(item));
      });
-   
+
   }
 
   getQuestionFormGroup(question: Question) {
@@ -201,7 +201,7 @@ export class SurveyCreateComponent implements OnInit {
     });
 
      optios.push(optionForm);
-          
+
     });
 
   }
