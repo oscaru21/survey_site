@@ -87,7 +87,7 @@ export function jwtTokenGetter(): string
         tokenGetter: jwtTokenGetter
       }
     }),
-    ChartModule
+    ChartModule,
   ],
   providers: [AuthService, RestDataSource, CategoryService, ColumnSeriesService, LegendService, TooltipService, DataLabelService],
   bootstrap: [AppComponent]

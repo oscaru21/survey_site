@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../model/auth.service';
+import { MatCardModule } from '@angular/material/card';
 
 import { User } from '../../model/user.model';
 
@@ -29,7 +30,7 @@ export class AuthComponent implements OnInit
     {
       // perform authentication
       console.log(JSON.stringify(this.user));
-      
+
       this.auth.authenticate(this.user).subscribe(data => {
         this.success = data.success
         if (this.success)

@@ -1,10 +1,9 @@
-.tp-radio-group {
-    display: inline-flex;
-    flex-direction: column;
-  }
-  .tp-radio-button {
-    margin: 5px;
-  }
-  .tp-selected-value {
-    margin: 15px 0;
-  }
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+mat-expansion-panel {
+  display: block;
+  margin-top: 0.5rem;
+}
