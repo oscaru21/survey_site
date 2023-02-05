@@ -21,7 +21,7 @@ These instructions will get you a copy of the project up and running on your loc
 ```console
 git clone https://github.com/oscaru21/survey_site.git
 ```
-2. Install the dependencies:
+2. cd client and Install the dependencies:
 ```console
 npm install
 ```
@@ -44,6 +44,15 @@ npm start
 
 ## Domain Class Diagram
 ![Domain Class Diagram](./documentation/SurveyAppDomainClassDiagram.jpg)
+
+## Login Page
+![login](./documentation/loginPage.jpg)
+
+## Home Page
+![home](./documentation/homePage.jpg)
+
+## Survey Creation Form
+![creation](./documentation/surveyCreation.jpg)
 
 ## Contributors
 

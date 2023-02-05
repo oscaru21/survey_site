@@ -2,7 +2,7 @@
   <mat-expansion-panel *ngFor="let survey of surveys">
     <mat-expansion-panel-header>
       <mat-panel-title>
-       <mat-label *ngIf="survey['title'] === null">{{survey['title']}} &nbsp;&nbsp;</mat-label>
+       <mat-label >{{survey['title']}} &nbsp;&nbsp;</mat-label>
         <mat-label *ngIf="isDisabled(survey['expiredDate'])" style="color:red">[ Expired ]</mat-label>
       </mat-panel-title>
       <mat-panel-description>
